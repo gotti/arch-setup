@@ -1,0 +1,73 @@
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo	=	'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo	=	'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo	=	'tomasr/molokai'
+
+[[plugins]]
+repo =  'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+
+[[plugins]]
+repo =  'Shougo/neosnippet.vim'
+hook_add = '''
+    let g:neosnippet#snippets_directory = '$HOME/.config/nvim/snippets'
+    let g:insert = 1
+    let g:filetypes = 'snippet'
+'''
+
+[[plugins]]
+repo =  'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo =  'tpope/vim-surround'
+
+[[plugins]]
+repo =  'tyru/open-browser.vim'
+
+[[plugins]]
+repo =  'dhruvasagar/vim-table-mode'
+
+[[plugins]]
+repo =  'neoclide/coc.nvim'
+build = './install.sh nightly'
+on_i = 1
+merged = '0'
+
+[[plugins]]
+repo =  'mbbill/undotree'
+[[plugins]]
+repo = 'mattn/vim-goimports'
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+
+[[plugins]]
+repo = 'previm/previm'
+hook_add = '''
+    autocmd BufRead,BufNewFile *.md  set filetype=markdown
+    nnoremap <silent> <C-p> :PrevimOpen<CR>
+    let g:vim_markdown_folding_disabled=1
+    let g:previm_enable_realtime = 1
+'''
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+
+[[plugins]]
+repo = 'nametake/vim-goiferr-snippets'
+
+[[plugins]]
+repo = 'glacambre/firenvim'
+hook_post_update = '''
+  call firenvim#install(0)
+'''
