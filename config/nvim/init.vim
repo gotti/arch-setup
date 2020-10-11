@@ -39,6 +39,7 @@ set completeopt=menuone,noinsert,preview
 set autoread
 au FocusGained,BufEnter * :silent! !
 set encoding=utf-8
+set fileencodings=utf-8,sjis,euc-jp
 set number
 set expandtab
 set tabstop=4
@@ -77,6 +78,7 @@ tnoremap <ESC> <C-\><C-n>
 nnoremap <silent> <C-j> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
 nnoremap <silent> <Esc><Esc> :noh<CR>
+autocmd InsertLeave * call system("fcitx-remote -c")
 
 let g:airline_powerline_fonts = 1
 set laststatus=2
@@ -165,4 +167,4 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-autocmd FileType verilog let b:coc_pairs_disabled = ['<']
+autocmd FileType verilog let b:coc_pairs_disabled = ['<',"'"]

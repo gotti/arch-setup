@@ -29,3 +29,4 @@ set LANG en_US.UTF8
 
 set VBOX_USB usbfs
 set -g FZF_CTRL_T_COMMAND "command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
+#export DOCKER_HOST=unix:///run/user/1000/docker.sock
