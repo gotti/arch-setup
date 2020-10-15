@@ -35,9 +35,9 @@ case "$software" in
   sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
 
   #install aurman, an AUR helper tool, if it is not installed
-  git clone https://aur.archlinux.org/aurman.git
   test -n $(cat /etc/pacman.conf| grep archlinuxfr)
-  if [ $? = 0 ]; then
+  if [ $? = 1 ]; then
+    git clone https://aur.archlinux.org/aurman.git
     cd aurman
     gpg --recv-keys `cat ./PKGBUILD | grep validpgpkey | sed "s/'/ /g" | awk '{print $2}'`
     makepkg -si
@@ -63,6 +63,7 @@ esac
 #copy dotfiles
 mkdir ~/.config/backup
 for file in $(find ./config -maxdepth 1); do
+  rm -rf ~/.config/$(basename $file)
   mv ~/.config/$(basename $file) ~/.config/backup
   cp -rf $(dirname $0)/config/$(basename $file) ~/.config/
 done
