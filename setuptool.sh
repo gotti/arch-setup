@@ -11,12 +11,12 @@ read -n1 software
 
 
 case "$software" in
-  [yY]* ) 
+  [yY]* )
     echo "Do you want to install desktop environment? [y/N]:"
     read -n1 desktop
     sudo pacman -Syu
     case "$desktop" in
-      [yY]* ) 
+      [yY]* )
         #create i3wm desktop environment
         sudo pacman -S --noconfirm --needed xf86-video-intel #video driver for intel iGPU
         sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xbacklight #X11 server
@@ -28,34 +28,34 @@ case "$software" in
         #make thunar show internal storages which aren't mounted yet
         sudo pacman -S --noconfirm --needed gvfs
         sudo pacman -S --noconfirm --needed rofi ttf-cica polybar #rofi program luncher, cica-font, polybar
-    esac
-    sudo pacman -S --noconfirm --needed atool neovim python3 curl fish cica #feh image viewer, atool compressing tool, fish shell, cica font
-    sudo pacman -S --noconfirm --needed base-devel git gnupg wget unzip
-    sudo systemctl enable lightdm
-    sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
+  esac
+  sudo pacman -S --noconfirm --needed atool neovim python3 curl fish cica #feh image viewer, atool compressing tool, fish shell, cica font
+  sudo pacman -S --noconfirm --needed base-devel git gnupg wget unzip
+  sudo systemctl enable lightdm
+  sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
 
-    #install aurman, an AUR helper tool, if it is not installed
-    git clone https://aur.archlinux.org/aurman.git
-    test -n $(cat /etc/pacman.conf| grep archlinuxfr)
-    if [ $? = 0 ]; then
-      cd aurman
-      gpg --recv-keys `cat ./PKGBUILD | grep validpgpkey | sed "s/'/ /g" | awk '{print $2}'`
-      makepkg -si
-      cd ..
-      rm -rf aurman
-      sudo bash -c "echo -e '[archlinuxfr]\nSigLevel = Never\nServer =https://repo.archlinux.fr/\$arch' >> /etc/pacman.conf"
-    fi
-    aurman -Syu
-    sudo systemctl enable lightdm
-    sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
+  #install aurman, an AUR helper tool, if it is not installed
+  git clone https://aur.archlinux.org/aurman.git
+  test -n $(cat /etc/pacman.conf| grep archlinuxfr)
+  if [ $? = 0 ]; then
+    cd aurman
+    gpg --recv-keys `cat ./PKGBUILD | grep validpgpkey | sed "s/'/ /g" | awk '{print $2}'`
+    makepkg -si
+    cd ..
+    rm -rf aurman
+    sudo bash -c "echo -e '[archlinuxfr]\nSigLevel = Never\nServer =https://repo.archlinux.fr/\$arch' >> /etc/pacman.conf"
+  fi
+  aurman -Syu
+  sudo systemctl enable lightdm
+  sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
 
-    #install dein and its requirements
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh
-    sh ./installer.sh ~/.cache/dein > /dev/null
-    sudo pacman -S --noconfirm --needed nodejs yarn python-pip
-    pip install neovim pynvim
-    sudo pacman -S --noconfirm --needed cargo
-    cargo install svls tectonic
+  #install dein and its requirements
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh
+  sh ./installer.sh ~/.cache/dein > /dev/null
+  sudo pacman -S --noconfirm --needed nodejs yarn python-pip
+  pip install neovim pynvim
+  sudo pacman -S --noconfirm --needed cargo
+  cargo install svls tectonic
 esac
 
 #settings
@@ -63,8 +63,8 @@ esac
 #copy dotfiles
 mkdir ~/.config/backup
 for file in $(find ./config -maxdepth 1); do
-    mv ~/.config/$(basename $file) ~/.config/backup
-    cp -rf $(dirname $0)/config/$(basename $file) ~/.config/
+  mv ~/.config/$(basename $file) ~/.config/backup
+  cp -rf $(dirname $0)/config/$(basename $file) ~/.config/
 done
 
 echo "Please execute nvim."
