@@ -74,12 +74,6 @@ let g:instant_markdown_autostart = 0
 '''
 
 [[plugins]]
-repo = 'lervag/vimtex'
-hook_add = '''
-let g:tex_flavor = 'xelatex'
-let g:vimtex_compiler_method = 'tectonic'
-'''
-[[plugins]]
 repo = 'vim-scripts/vim-auto-save'
 on_event = 'InsertLeave'
 hook_add = '''
@@ -88,8 +82,3 @@ hook_add = '''
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_silent = 1
 '''
-
-[[plugins]]
-repo = 'lukas-reineke/indent-blankline.nvim'
-[[plugins]]
-repo = 'Yggdroot/indentLine'

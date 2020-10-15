@@ -39,9 +39,15 @@ mv ~/.config/* ~/.config/backup/
 cp -rf $(dirname $0)/config/* ~/.config/
 #copy other configs
 ##copy x11 config
-sudo cp -rf ./otherconfig/X11/* /etc/X11/xorg.conf.d/
-#install dein
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.cache/dein
+
+
+#install dein and its requirements
+print("Please execute nvim after execution.")
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh
+sh ./installer.sh ~/.cache/dein > /dev/null
 sudo pacman -S --noconfirm --needed nodejs yarn python-pip
 pip install neovim pynvim
+
+#SystemVerilog language server and XeTex compiler
+sudo pacman -S --noconfirm --needed cargo
+cargo install svls tectonic

@@ -36,8 +36,11 @@ function! g:Undotree_CustomMap()
 endfunction
 
 set completeopt=menuone,noinsert,preview
+
+"autoread when the window capture the cursor
 set autoread
 au FocusGained,BufEnter * :silent! !
+
 set encoding=utf-8
 set fileencodings=utf-8,sjis,euc-jp
 set number
@@ -58,12 +61,15 @@ set matchtime=1
 set matchpairs& matchpairs+=<:>
 set clipboard+=unnamedplus
 set mouse=a
+
+" for use of autosave and multi window provided by i3, not vim's splitting
 set noswapfile
 set nobackup
 
 set display=uhex
 colorscheme molokai
 
+" disable pasting by middleclick
 map <MiddleMouse>   <Nop>
 map <2-MiddleMouse> <Nop>
 map <3-MiddleMouse> <Nop>
@@ -73,11 +79,15 @@ imap <2-MiddleMouse> <Nop>
 imap <3-MiddleMouse> <Nop>
 imap <4-MiddleMouse> <Nop>
 
+"I don't like molokai's hilighting of pair. Is it a bug?
 hi MatchParen      ctermfg=208 ctermbg=233 cterm=bold 
+
 tnoremap <ESC> <C-\><C-n>
 nnoremap <silent> <C-j> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
+"Press ESC twice, nvim disable hilighting of matching
 nnoremap <silent> <Esc><Esc> :noh<CR>
+"When leaving insertion mode, disable ime
 autocmd InsertLeave * call system("fcitx-remote -c")
 
 let g:airline_powerline_fonts = 1
@@ -85,16 +95,7 @@ set laststatus=2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
-"let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
-"let g:airline_section_c = '%t'
-"let g:airline_section_x = '%{&filetype}'
-"let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
-"let g:airline#extensions#ale#error_symbol = ' '
-"let g:airline#extensions#ale#warning_symbol = ' '
-"let g:airline#extensions#default#section_truncate_width = {}
-"let g:airline#extensions#whitespace#enabled = 1
-"let g:airline#extensions#ale#enabled = 1
-"nmap <silent> gd :LspDefinition<CR>
+
 nmap <silent> <f2> :LspRename<CR>
 let mapleader = ","
 nmap <silent> <Leader>d :LspTypeDefinition<CR>
@@ -107,9 +108,9 @@ let g:lsp_text_edit_enabled = 0
 " imap <expr> <TAB>
 "            \ pumvisible() ? "\<C-n>" :
 "            \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"If completion window appears and you press TAB, select next
 imap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-imap <expr><A-l> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<A-l>"
-
+"
 " SuperTab like snippets behavior.
 "imap  <expr><TAB>
 "    \ pumvisible() ? "\<C-n>" :
@@ -129,7 +130,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <f3>  <Plug>(coc-fix-current)
 inoremap <silent><expr> <c-space> coc#refresh()
 if exists('*complete_info')
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
