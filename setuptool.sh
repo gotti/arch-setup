@@ -54,6 +54,7 @@ case "$software" in
   sh ./installer.sh ~/.cache/dein > /dev/null
   sudo pacman -S --noconfirm --needed nodejs yarn python-pip
   pip install neovim pynvim
+  #SystemVerilog language server and XeTex compiler
   sudo pacman -S --noconfirm --needed cargo
   cargo install svls tectonic
 esac
@@ -69,4 +70,3 @@ for file in $(find ./config -maxdepth 1); do
 done
 
 echo "Please execute nvim."
-#SystemVerilog language server and XeTex compiler

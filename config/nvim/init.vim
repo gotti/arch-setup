@@ -168,4 +168,5 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
 autocmd FileType verilog let b:coc_pairs_disabled = ['<',"'"]
