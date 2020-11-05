@@ -82,3 +82,10 @@ hook_add = '''
   let g:auto_save_in_insert_mode = 0
   let g:auto_save_silent = 1
 '''
+
+[[plugins]]
+repo = 'lervag/vimtex'
+hook_add = '''
+let g:tex_flavor = 'xelatex'
+let g:vimtex_compiler_method = 'tectonic'
+'''
