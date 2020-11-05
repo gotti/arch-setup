@@ -61,12 +61,14 @@ esac
 
 #settings
 
-#copy dotfiles
-mkdir ~/.config/backup
-for file in $(find ./config -maxdepth 1); do
-  rm -rf ~/.config/$(basename $file)
-  mv ~/.config/$(basename $file) ~/.config/backup
-  cp -rf $(dirname $0)/config/$(basename $file) ~/.config/
+#make symbolic link to .config/(some package)
+for file in $(find $(pwd -P)/$(dirname $0)/config -maxdepth 1 -type d); do
+  if [ $(basename $file) == "config" ]; then
+    continue
+  fi
+  echo $(dirname $0)
+  echo $(pwd -P)/$(dirname $0)/config/$(basename $file)
+  ln -s $(pwd -P)/$(dirname $0)/config/$(basename $file) ~/.config/$(basename $file)
 done
 
-echo "Please execute nvim."
+echo "Please execute nvim for installing coc."
