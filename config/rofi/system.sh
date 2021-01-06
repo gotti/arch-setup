@@ -5,7 +5,7 @@ set -euCo pipefail
 function main() {
   # 表示したい項目と実際に実行するコマンドを連想配列として定義する。
   local -Ar menu=(
-    ['Lock']='dm-tool lock'
+    ['Lock']='i3lock'
     ['Logout']='i3-msg exit'
     ['Suspend']='systemctl suspend'
     ['Poweroff']='systemctl poweroff'

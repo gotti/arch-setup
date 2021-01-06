@@ -24,7 +24,7 @@ endif
 
 filetype plugin indent on
 syntax enable
-
+let g:dein#auto_recache = 1
 set undodir=$HOME/.config/undodir/
 set undofile
 let g:undotree_SetFocusWhenToggle = 1
