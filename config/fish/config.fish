@@ -12,11 +12,9 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias se='grep $1 -rl $2'
 bind \cd delete-char
-alias vi=nvim
-alias vim=nvim
 export GOPATH=$HOME/.go/vendor
 export JAVA_HOME="/opt/java/jdk-11.0.2"
-export PATH="$PATH:$HOME/.go/go/bin:$GOPATH/bin:$HOME/.cargo/bin:/opt/intelFPGA/20.1/quartus/bin/:/usr/bin:$JAVA_HOME/bin:$HOME/bin:$HOME/.gem/ruby/2.7.0/bin"
+export PATH="$PATH:$HOME/.go/go/bin:$GOPATH/bin:$HOME/.cargo/bin:/opt/intelFPGA/20.1/quartus/bin/:/usr/bin:$JAVA_HOME/bin:$HOME/bin:$HOME/.gem/ruby/2.7.0/bin:$HOME/.local/bin"
 export GO111MODULE=on
 
 export DOCKER_HOST=unix:///run/user/1001/docker.sock
