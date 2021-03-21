@@ -34,18 +34,7 @@ case "$software" in
   sudo systemctl enable lightdm
   sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
 
-  #install aurman, an AUR helper tool, if it is not installed
-  test -n $(cat /etc/pacman.conf| grep archlinuxfr)
-  if [ $? = 1 ]; then
-    git clone https://aur.archlinux.org/aurman.git
-    cd aurman
-    gpg --recv-keys `cat ./PKGBUILD | grep validpgpkey | sed "s/'/ /g" | awk '{print $2}'`
-    makepkg -si
-    cd ..
-    rm -rf aurman
-    sudo bash -c "echo -e '[archlinuxfr]\nSigLevel = Never\nServer =https://repo.archlinux.fr/\$arch' >> /etc/pacman.conf"
-  fi
-  aurman -Syu
+  sudo pacman -S yay
   sudo systemctl enable lightdm
   sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
 
@@ -56,7 +45,6 @@ case "$software" in
   pip install neovim pynvim
   #SystemVerilog language server and XeTex compiler
   sudo pacman -S --noconfirm --needed cargo
-  cargo install svls tectonic
 esac
 
 #settings

@@ -107,14 +107,14 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
 
-nmap <silent> <f2> :LspRename<CR>
-let mapleader = ","
-nmap <silent> <Leader>d :LspTypeDefinition<CR>
-nmap <silent> <Leader>r :LspReferences<CR>
-nmap <silent> <Leader>i :LspImplementation<CR>
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_text_edit_enabled = 0
+"nmap <silent> <f2> :LspRename<CR>
+"let mapleader = ","
+"nmap <silent> <Leader>d :LspTypeDefinition<CR>
+"nmap <silent> <Leader>r :LspReferences<CR>
+"nmap <silent> <Leader>i :LspImplementation<CR>
+"let g:lsp_diagnostics_enabled = 1
+"let g:lsp_diagnostics_echo_cursor = 1
+"let g:lsp_text_edit_enabled = 0
 
 " imap <expr> <TAB>
 "            \ pumvisible() ? "\<C-n>" :
@@ -140,6 +140,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gn <Plug>(coc-rename)
+nmap <silent> gf <Plug>(coc-fmt)
+
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <f3>  <Plug>(coc-fix-current)
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -180,4 +183,4 @@ else
   set signcolumn=yes
 endif
 
-autocmd FileType verilog let b:coc_pairs_disabled = ['<',"'"]
+autocmd FileType systemverilog let b:coc_pairs_disabled = ['<',"'"]

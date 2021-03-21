@@ -38,9 +38,7 @@ repo = 'dhruvasagar/vim-table-mode'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
-on_i = 1
-merged = '0'
+rev = 'release'
 
 [[plugins]]
 repo =  'mbbill/undotree'
