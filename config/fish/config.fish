@@ -16,7 +16,7 @@ export GO111MODULE=on
 export VISUAL=nvim
 export EDITOR=nvim
 
-#export DOCKER_HOST=unix:///run/user/1000/docker.sock
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 function fish_user_key_bindings
   bind \cr 'peco_select_history (commandline -b)'
   bind \cx\ck peco_kill

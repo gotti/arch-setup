@@ -177,7 +177,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Launch1 exec i3lock
 bindsym $mod+Left workspace prev
 bindsym $mod+Right workspace next
-bindsym Shift+Print exec maim -u -s ~/screenshots/$(date +%F-%T).png
+bindsym Shift+Print exec flameshot gui
 bindsym Print exec maim -u -s | xclip -selection clipboard -target image/png
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

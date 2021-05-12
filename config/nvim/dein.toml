@@ -65,7 +65,7 @@ hook_post_update = '''
 '''
 
 [[plugins]]
-repo = 'vim-scripts/vim-auto-save'
+repo = '907th/vim-auto-save'
 on_event = 'InsertLeave'
 hook_add = '''
   let g:auto_save = 1

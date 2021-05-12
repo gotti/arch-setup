@@ -1,7 +1,7 @@
 {
   "suggest.noselect":true,
   "suggest.preferCompleteThanJumpPlaceholder":true,
-  "tabnine.priority":110,
+  "tabnine.priority":100,
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -11,6 +11,21 @@
     "svls": {
         "command": "svls",
         "filetypes": ["systemverilog"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls"
+         }
+       }
+    },
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["markdown","latex","tex"]
     }
   }
 }
