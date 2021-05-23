@@ -1,7 +1,6 @@
 {
   "suggest.noselect":true,
   "suggest.preferCompleteThanJumpPlaceholder":true,
-  "tabnine.priority":100,
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -26,6 +25,40 @@
       "command": "efm-langserver",
       "args": [],
       "filetypes": ["markdown","latex","tex"]
-    }
-  }
+    },
+    "dls": {
+     "command": "diagnostic-languageserver",
+     "args": ["--stdio"],
+     "filetypes": [ "go" ],
+     "initializationOptions": {
+       "linters": {
+         "golint": {
+           "command": "golint",
+           "rootPatterns": [],
+           "isStdout": true,
+           "isStderr": false,
+           "debounce": 100,
+           "args": ["%filepath"],
+           "offsetLine": 0,
+           "offsetColumn": 0,
+           "sourceName": "golint",
+           "formatLines": 1,
+           "formatPattern": [
+             "^[^:]+:(\\d+):(\\d+):\\s(.*)$",
+             {
+               "line": 1,
+               "column": 2,
+               "message": [3]
+             }
+           ]
+         }
+       },
+       "formatters": {},
+       "filetypes": {
+         "go": "golint"
+       },
+       "formatFiletypes": {}
+     }
+   }
+ }
 }

@@ -20,7 +20,7 @@ case "$software" in
         #create i3wm desktop environment
         sudo pacman -S --noconfirm --needed xf86-video-intel #video driver for intel iGPU
         sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xbacklight #X11 server
-        sudo pacman -S --noconfirm --needed i3-wm lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings terminator #i3wm window manager, lightdm login interface, terminator terminal emulator
+        sudo pacman -S --noconfirm --needed i3-wm terminator #i3wm window manager, lightdm login interface, terminator terminal emulator
         sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth #bluetooth utils for GUI
         sudo pacman -S --noconfirm --needed pulseaudio pavucontrol #audio utils
         sudo pacman -S --noconfirm --needed xrandr #for multiple monitor
@@ -31,12 +31,10 @@ case "$software" in
   esac
   sudo pacman -S --noconfirm --needed atool neovim python3 curl fish cica #feh image viewer, atool compressing tool, fish shell, cica font
   sudo pacman -S --noconfirm --needed base-devel git gnupg wget unzip
-  sudo systemctl enable lightdm
-  sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
-
-  sudo pacman -S yay
-  sudo systemctl enable lightdm
-  sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  cd ..
 
   #install dein and its requirements
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh
