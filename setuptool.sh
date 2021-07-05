@@ -20,11 +20,8 @@ case "$software" in
         #create i3wm desktop environment
         sudo pacman -S --noconfirm --needed xf86-video-intel #video driver for intel iGPU
         sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xbacklight #X11 server
-<<<<<<< HEAD
         sudo pacman -S --noconfirm --needed i3-wm terminator #i3wm window manager, terminator terminal emulator
-=======
         sudo pacman -S --noconfirm --needed i3-wm terminator #i3wm window manager, lightdm login interface, terminator terminal emulator
->>>>>>> 507ad8b5a3422ac17fcd4bbf003abfd38671c390
         sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth #bluetooth utils for GUI
         sudo pacman -S --noconfirm --needed pulseaudio pavucontrol #audio utils
         sudo pacman -S --noconfirm --needed xrandr #for multiple monitor
@@ -34,7 +31,6 @@ case "$software" in
   esac
   sudo pacman -S --noconfirm --needed atool neovim python3 curl fish cica #feh image viewer, atool compressing tool, fish shell, cica font
   sudo pacman -S --noconfirm --needed base-devel git gnupg wget unzip
-<<<<<<< HEAD
   sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
   test -n $(cat /etc/pacman.conf| grep archlinuxfr)
   if [ $? = 1 ]; then
@@ -48,12 +44,10 @@ case "$software" in
   yay -Syu
   yay -S rofi ttf-cica polybar #rofi program luncher, cica-font, polybar
   sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
-=======
   git clone https://aur.archlinux.org/yay.git
   cd yay
   makepkg -si
   cd ..
->>>>>>> 507ad8b5a3422ac17fcd4bbf003abfd38671c390
 
   #install dein and its requirements
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh
