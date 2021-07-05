@@ -56,9 +56,9 @@ set encoding=utf-8
 set fileencodings=utf-8,sjis,euc-jp
 set number
 set expandtab
-set tabstop=4
+set tabstop=2
 set autoindent
-set shiftwidth=4
+set shiftwidth=2
 set smartindent
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
@@ -101,6 +101,7 @@ nnoremap <silent> <Esc><Esc> :noh<CR>
 "When leaving insertion mode, disable ime
 autocmd InsertLeave * call system("fcitx-remote -c")
 
+let g:airline_theme = 'angr'
 let g:airline_powerline_fonts = 1
 set laststatus=2
 let g:airline#extensions#branch#enabled = 1
