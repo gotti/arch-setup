@@ -66,8 +66,13 @@ for file in $(find $(pwd -P)/$(dirname $0)/config -maxdepth 1 -type d); do
   if [ $(basename $file) == "config" ]; then
     continue
   fi
+
   echo $(dirname $0)
   echo $(pwd -P)/$(dirname $0)/config/$(basename $file)
+  if [ -d ~/.config/$(basename $file) ]; then
+    echo "skipped..."
+    continue
+  fi
   ln -s $(pwd -P)/$(dirname $0)/config/$(basename $file) ~/.config/$(basename $file)
 done
 
