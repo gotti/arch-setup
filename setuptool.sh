@@ -1,33 +1,22 @@
 #!/bin/bash
 
-echo "Do not run this script twice."
-if [ $USER == "root" ]; then
-  echo "!!Error: Do not run from root user."
-fi
-echo "Do you want to install softwares? If not, only the configs will be copied to your machine. [y/N]:"
-read -n1 software
-
-#install packages
-
-
-case "$software" in
-  [yY]* )
-    echo "Do you want to install desktop environment? [y/N]:"
-    read -n1 desktop
-    sudo pacman -Syu
-    case "$desktop" in
-      [yY]* )
-        #create i3wm desktop environment
-        sudo pacman -S --noconfirm --needed xf86-video-intel #video driver for intel iGPU
-        sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xbacklight #X11 server
-        sudo pacman -S --noconfirm --needed i3-wm terminator #i3wm window manager, terminator terminal emulator
-        sudo pacman -S --noconfirm --needed i3-wm terminator #i3wm window manager, lightdm login interface, terminator terminal emulator
-        sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth #bluetooth utils for GUI
-        sudo pacman -S --noconfirm --needed pulseaudio pavucontrol #audio utils
-        sudo pacman -S --noconfirm --needed xrandr #for multiple monitor
-        sudo pacman -S --noconfirm --needed firefox thunar feh maim xclip
-        #make thunar show internal storages which aren't mounted yet
-        sudo pacman -S --noconfirm --needed gvfs
+function install_for_archlinux(){
+  echo "Do you want to install desktop environment? [y/N]:"
+  read -n1 desktop
+  sudo pacman -Syu
+  case "$desktop" in
+    [yY]* )
+      #create i3wm desktop environment
+      sudo pacman -S --noconfirm --needed xf86-video-intel #video driver for intel iGPU
+      sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xbacklight #X11 server
+      sudo pacman -S --noconfirm --needed i3-wm terminator #i3wm window manager, terminator terminal emulator
+      sudo pacman -S --noconfirm --needed i3-wm terminator #i3wm window manager, lightdm login interface, terminator terminal emulator
+      sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth #bluetooth utils for GUI
+      sudo pacman -S --noconfirm --needed pulseaudio pavucontrol #audio utils
+      sudo pacman -S --noconfirm --needed xrandr #for multiple monitor
+      sudo pacman -S --noconfirm --needed firefox thunar feh maim xclip
+      #make thunar show internal storages which aren't mounted yet
+      sudo pacman -S --noconfirm --needed gvfs
   esac
   sudo pacman -S --noconfirm --needed atool neovim python3 curl fish cica #feh image viewer, atool compressing tool, fish shell, cica font
   sudo pacman -S --noconfirm --needed base-devel git gnupg wget unzip
@@ -41,6 +30,7 @@ case "$software" in
     rm -rf yay
     #sudo bash -c "echo -e '[archlinuxfr]\nSigLevel = Never\nServer =https://repo.archlinux.fr/\$arch' >> /etc/pacman.conf"
   fi
+
   yay -Syu
   yay -S rofi ttf-cica polybar #rofi program luncher, cica-font, polybar
   sudo systemctl disable dhcpd #disable dhcpd for avoiding conflicts between NetworkManager and dhcpd
@@ -57,6 +47,61 @@ case "$software" in
   pip install neovim pynvim
   #SystemVerilog language server and XeTex compiler
   sudo pacman -S --noconfirm --needed cargo
+}
+
+function install_for_macos() {
+  brew install docker-buildx
+  brew install ncdu
+  brew install yarn
+  brew install --cask iterm2
+  brew install mysql-client
+  brew install golang
+  brew install the_silver_searcher
+  brew install docker-compose
+  brew install iperf3
+  brew install tcpdump
+  brew install obsidian
+  brew install gh
+  brew install spotify
+  brew install lima
+  brew install docker
+  brew install python3
+  brew install pyenv
+  brew install nmap
+  brew install syncthing
+  brew install karabiner-elements
+  brew install slack
+  brew install discord
+  brew install cursor
+  brew install bitwarden
+  brew install meetingbar
+  brew install neovim
+  brew install fzf
+}
+
+if [ $USER == "root" ]; then
+  echo "!!Error: Do not run from root user."
+fi
+echo "Do you want to install softwares? If not, only the configs will be copied to your machine. [y/N]:"
+read -n1 software
+
+#install packages
+
+case "$software" in
+  [yY]* )
+    if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+      if [ -f /etc/arch-release ]; then
+        install_for_archlinux
+      else
+        echo "!!Error: This script only supports Arch Linux."
+        exit 1
+      fi
+    elif [ "$(expr substr $(uname -s) 1 5)" == "Darwin" ]; then
+      install_for_macos
+    else
+      echo "!!Error: This script only supports Arch Linux and MacOS."
+      exit 1
+    fi
 esac
 
 #settings
