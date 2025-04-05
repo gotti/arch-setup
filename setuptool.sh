@@ -50,33 +50,8 @@ function install_for_archlinux(){
 }
 
 function install_for_macos() {
-  brew install docker-buildx
-  brew install ncdu
-  brew install yarn
-  brew install --cask iterm2
-  brew install mysql-client
-  brew install golang
-  brew install the_silver_searcher
-  brew install docker-compose
-  brew install iperf3
-  brew install tcpdump
-  brew install obsidian
-  brew install gh
-  brew install spotify
-  brew install lima
-  brew install docker
-  brew install python3
-  brew install pyenv
-  brew install nmap
-  brew install syncthing
-  brew install karabiner-elements
-  brew install slack
-  brew install discord
-  brew install cursor
-  brew install bitwarden
-  brew install meetingbar
-  brew install neovim
-  brew install fzf
+  brew install --cask iterm2 slack discord cursor bitwarden meetingbar
+  brew install docker-buildx docker-compose docker ncdu yarn mysql-client golang the_silver_searcher iperf3 tcpdump obsidian gh spotify lima python3 pyenv nmap syncthing karabiner-elements neovim fzf
 }
 
 if [ $USER == "root" ]; then
@@ -89,15 +64,15 @@ read -n1 software
 
 case "$software" in
   [yY]* )
-    if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    if [ "$(uname)" == "Darwin" ]; then
+      install_for_macos
+    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
       if [ -f /etc/arch-release ]; then
         install_for_archlinux
       else
         echo "!!Error: This script only supports Arch Linux."
         exit 1
       fi
-    elif [ "$(expr substr $(uname -s) 1 5)" == "Darwin" ]; then
-      install_for_macos
     else
       echo "!!Error: This script only supports Arch Linux and MacOS."
       exit 1
