@@ -181,3 +181,4 @@ au FileType go setlocal sw=4 ts=4 sts=4 noet
 filetype plugin indent on
 
 autocmd FileType systemverilog let b:coc_pairs_disabled = ['<',"'"]
+let g:copilot_filetypes = {'markdown': v:true}

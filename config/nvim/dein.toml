@@ -70,12 +70,6 @@ hook_add = '''
 repo = 'nametake/vim-goiferr-snippets'
 
 [[plugins]]
-repo = 'glacambre/firenvim'
-hook_post_update = '''
-    call firenvim#install(0)
-'''
-
-[[plugins]]
 repo = '907th/vim-auto-save'
 on_event = 'InsertLeave'
 hook_add = '''
@@ -91,3 +85,9 @@ hook_add = '''
 let g:tex_flavor = 'xelatex'
 let g:vimtex_compiler_method = 'tectonic'
 '''
+
+[[plugins]]
+repo = 'github/copilot.vim'
+
+[[plugins]]
+repo = 'wakatime/vim-wakatime'
