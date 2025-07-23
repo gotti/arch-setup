@@ -90,8 +90,8 @@ imap <4-MiddleMouse> <Nop>
 hi MatchParen      ctermfg=208 ctermbg=233 cterm=bold 
 
 tnoremap <ESC> <C-\><C-n>
-nnoremap <silent> <C-j> :bprev<CR>
-nnoremap <silent> <C-k> :bnext<CR>
+nnoremap <silent> <C-h> :bprev<CR>
+nnoremap <silent> <C-l> :bnext<CR>
 "Press ESC twice, nvim disable hilighting of matching
 nnoremap <silent> <Esc><Esc> :noh<CR>
 "When leaving insertion mode, disable ime
