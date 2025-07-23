@@ -18,7 +18,7 @@ repo = 'vim-airline/vim-airline-themes'
 repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
-repo = 'tomasr/molokai'
+repo = 'catppuccin/nvim'
 
 #もしかしていらない？
 #[[plugins]]
@@ -54,9 +54,6 @@ rev = 'release'
 
 [[plugins]]
 repo =  'mbbill/undotree'
-
-#[[plugins]]
-#repo = 'mattn/vim-goimports'
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'

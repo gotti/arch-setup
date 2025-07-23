@@ -1,7 +1,3 @@
-if !&compatible
-  set nocompatible
-endif
-
 " reset augroup
 augroup MyAutoCmd
   autocmd!
@@ -78,7 +74,7 @@ set noswapfile
 set nobackup
 
 set display=uhex
-colorscheme molokai
+colorscheme catppuccin
 
 " disable pasting by middleclick
 map <MiddleMouse>   <Nop>
@@ -99,7 +95,11 @@ nnoremap <silent> <C-k> :bnext<CR>
 "Press ESC twice, nvim disable hilighting of matching
 nnoremap <silent> <Esc><Esc> :noh<CR>
 "When leaving insertion mode, disable ime
-autocmd InsertLeave * call system("fcitx-remote -c")
+"only when linux os is used
+"do not on macOS
+if has('unix') && !has('mac')
+  autocmd InsertLeave * call system("fcitx-remote -c")
+endif
 
 let g:airline_theme = 'angr'
 let g:airline_powerline_fonts = 1
@@ -108,20 +108,21 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
 
-"nmap <silent> <f2> :LspRename<CR>
-"let mapleader = ","
-"nmap <silent> <Leader>d :LspTypeDefinition<CR>
-"nmap <silent> <Leader>r :LspReferences<CR>
-"nmap <silent> <Leader>i :LspImplementation<CR>
-"let g:lsp_diagnostics_enabled = 1
-"let g:lsp_diagnostics_echo_cursor = 1
-"let g:lsp_text_edit_enabled = 0
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-" imap <expr> <TAB>
-"            \ pumvisible() ? "\<C-n>" :
-"            \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 "If completion window appears and you press TAB, select next
-imap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap  <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 "
 " SuperTab like snippets behavior.
 "imap  <expr><TAB>
@@ -153,11 +154,6 @@ nmap <silent> <space>fmt <Plug>(coc-format)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <f3>  <Plug>(coc-fix-current)
 inoremap <silent><expr> <c-space> coc#refresh()
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
 nmap <silent> <space><space> :<C-u>CocList<cr><Paste>
 highlight CocErrorSign ctermfg=15 ctermbg=196
 highlight CocWarningSign ctermfg=0 ctermbg=172
@@ -181,13 +177,7 @@ let g:deoplete#enable_at_startup = 1
 "   \: "\<TAB>"
 
 nmap gx <Plug>(openbrowser-smart-search)
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+au FileType go setlocal sw=4 ts=4 sts=4 noet
+filetype plugin indent on
 
 autocmd FileType systemverilog let b:coc_pairs_disabled = ['<',"'"]
